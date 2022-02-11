@@ -5,8 +5,8 @@ public class TestaConexao {
 	
 	public static void main(String[] args) throws SQLException {
 		
-		ConnectionFactory criaConexao = new ConnectionFactory();
-		Connection connection = criaConexao.recuperarConexao();
+		ConnectionFactory connectionFactory = new ConnectionFactory();
+		Connection connection = connectionFactory.recuperarConexao();
 
 		connection.close();
 	}
