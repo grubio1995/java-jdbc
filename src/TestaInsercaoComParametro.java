@@ -10,11 +10,22 @@ public class TestaInsercaoComParametro {
 		Connection connection = factory.recuperarConexao();
 		connection.setAutoCommit(false);
 
+		try {
 		PreparedStatement stm = connection.prepareStatement("INSERT INTO PRODUTO (nome, descricao) VALUES (? , ?)", 
 				PreparedStatement.RETURN_GENERATED_KEYS);
 		
 		adicionarVariavel("SmartTV", "45 polegadas", stm);
 		adicionarVariavel("Radio", "Radio de bateria", stm);
+		
+		connection.commit();
+		
+		stm.close();
+		connection.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Rollback executado");
+			connection.rollback();
+		}
 
 	}
 
@@ -22,9 +33,9 @@ public class TestaInsercaoComParametro {
 		stm.setString(1, nome);
 		stm.setString(2, descricao);
 		
-//		if(nome.equals("Radio")) {
-//			throw new RuntimeException("Não possivel adicionar o produto");
-//		}
+		if(nome.equals("Radio")) {
+			throw new RuntimeException("Não possivel adicionar o produto");
+		}
 		
 		stm.execute();
 	
@@ -34,7 +45,6 @@ public class TestaInsercaoComParametro {
 			Integer id = rst.getInt(1);
 			System.out.println("O id criado foi: " + id);
 		}
-		
 		rst.close();
 	}
 }
