@@ -20,13 +20,12 @@ public class TestaInsercaoComParametro {
 		connection.commit();
 		
 		stm.close();
-		connection.close();
 		} catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("Rollback executado");
 			connection.rollback();
 		}
-
+		connection.close();
 	}
 
 	private static void adicionarVariavel(String nome, String descricao, PreparedStatement stm) throws SQLException {
