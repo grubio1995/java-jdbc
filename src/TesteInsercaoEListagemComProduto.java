@@ -12,11 +12,11 @@ public class TesteInsercaoEListagemComProduto {
 
 	public static void main(String[] args) throws SQLException{	
 
-		Produto comoda = new Produto("Cômoda", "Cômoda Vertical");
+		Produto comoda = new Produto("Teste2", "Teste", 1);
 
 		try(Connection connection = new ConnectionFactory().recuperarConexao()){
 			ProdutoDao produtoDao = new ProdutoDao(connection);
-			produtoDao.salvar(comoda);
+//			produtoDao.salvar(comoda);
 			
 			List<Produto> listaProdutos = produtoDao.listar();
 			listaProdutos.forEach(System.out::println);
