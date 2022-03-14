@@ -1,8 +1,8 @@
+package br.com.alura.jdbc;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import br.com.alura.jdbc.ConnectionFactory;
 import dao.CategoriaDAO;
 import modelo.Categoria;
 import modelo.Produto;
