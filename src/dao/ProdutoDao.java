@@ -40,15 +40,22 @@ public class ProdutoDao {
 		System.out.println(produto);
 	}
 	
-	public List<Produto> listar() throws SQLException {
+	public List<Produto> listar(Integer id) throws SQLException {
 
 		
 		List<Produto> produtos = new ArrayList<>();
 		
-		String sql = "SELECT * FROM PRODUTO";
+		String sql = "";
+		
+		if(id > 0) {
+			sql = "SELECT * FROM PRODUTO WHERE CATEGORIA_ID = ?";			
+		} else {
+			sql = "SELECT * FROM PRODUTO";			
+		}
 
 		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
-
+			
+			pstm.setInt(1, id);
 			pstm.execute();
 
 			try (ResultSet rst = pstm.getResultSet()) {
@@ -60,5 +67,9 @@ public class ProdutoDao {
 		}
 		
 		return produtos;
+	}
+
+	public List<Produto> buscar(Integer id) throws SQLException {
+		return listar(id);
 	}
 }

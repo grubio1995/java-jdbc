@@ -18,7 +18,7 @@ public class TesteInsercaoEListagemComProduto {
 			ProdutoDao produtoDao = new ProdutoDao(connection);
 			produtoDao.salvar(comoda);
 			
-			List<Produto> listaProdutos = produtoDao.listar();
+			List<Produto> listaProdutos = produtoDao.listar(0);
 			listaProdutos.forEach(System.out::println);
 				
 		}
