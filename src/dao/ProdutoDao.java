@@ -36,40 +36,29 @@ public class ProdutoDao {
 				}
 			}
 		}
-
-		System.out.println(produto);
 	}
-	
-	public List<Produto> listar(Integer id) throws SQLException {
 
-		
+	public List<Produto> listar() throws SQLException {
+
 		List<Produto> produtos = new ArrayList<>();
-		
+
 		String sql = "";
-		
-		if(id > 0) {
-			sql = "SELECT * FROM PRODUTO WHERE CATEGORIA_ID = ?";			
-		} else {
-			sql = "SELECT * FROM PRODUTO";			
-		}
+
+		sql = "SELECT * FROM PRODUTO";
 
 		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
-			
-			pstm.setInt(1, id);
+
 			pstm.execute();
 
 			try (ResultSet rst = pstm.getResultSet()) {
 
 				while (rst.next()) {
-					produtos.add(new Produto(rst.getInt(1),rst.getString(2), rst.getString(3)));
+					produtos.add(new Produto(rst.getInt(1), rst.getString(2), rst.getString(3)));
 				}
 			}
 		}
-		
+
 		return produtos;
 	}
 
-	public List<Produto> buscar(Integer id) throws SQLException {
-		return listar(id);
-	}
 }
